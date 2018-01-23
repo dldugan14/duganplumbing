@@ -6,28 +6,33 @@ class Header extends Component {
     return (
       <div>
         <nav className="App-header">
-          <div className="container">
-            <h1>{this.props.appName}</h1>
-            <ul className="nav navbar-nav">
-              <li className="nav-item">
-                <NavLink to="/" activeClassName="active">
-                  Home
-                </NavLink>
-              </li>
+          <ul className="nav navbar-nav ">
+            <li className="nav-item">
+              <NavLink to="/" className="nav-item" activeClassName="active">
+                Home
+              </NavLink>
+            </li>
 
-              <li className="nav-item">
-                <NavLink to="aboutus" activeClassName="active">
-                  About Us
-                </NavLink>
-              </li>
+            <li className="nav-item">
+              <NavLink
+                to="aboutus"
+                className="nav-item"
+                activeClassName="active"
+              >
+                About Us
+              </NavLink>
+            </li>
 
-              <li className="nav-item">
-                <NavLink to="contact" activeClassName="active">
-                  Schedule an Appointment
-                </NavLink>
-              </li>
-            </ul>
-          </div>
+            <li className="nav-item">
+              <NavLink
+                to="contact"
+                className="nav-item"
+                activeClassName="active"
+              >
+                Schedule an Appointment
+              </NavLink>
+            </li>
+          </ul>
         </nav>
       </div>
     );
