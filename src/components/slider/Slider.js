@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import axios from "axios";
 import Slide from "./Slide";
-// import Dots from "./Dots";
+import Dots from "./Dots";
 
 import SliderLeftArrow from "./SliderLeftArrow";
 import SliderRightArrow from "./SliderRightArrow";
@@ -32,6 +32,12 @@ export default class Slider extends Component {
     this.setState({
       images: pics
     });
+
+    let x = window.setInterval(() => {
+      this.goToNextSlide();
+    }, 10000);
+
+    this.setState({ interval: x });
   }
 
   renderSlides = () => {
@@ -45,11 +51,27 @@ export default class Slider extends Component {
     return slides;
   };
 
+  handleDotClick = i => {
+    const { images } = this.state;
+
+    if (i === this.state.index) return;
+
+    if (i > this.state.index) {
+      return this.setState({
+        index: i,
+        translateValue: -(i * this.slideWidth())
+      });
+    } else {
+      this.setState({
+        index: i,
+        translateValue: (this.state.translateValue +=
+          (this.state.index - i) * this.slideWidth())
+      });
+    }
+  };
+
   render() {
-    const {
-      // images, index,
-      translateValue
-    } = this.state;
+    const { images, index, translateValue } = this.state;
     return (
       <div className="slider">
         <div
@@ -62,11 +84,11 @@ export default class Slider extends Component {
           <div>{this.renderSlides()}</div>
         </div>
 
-        {/* <Dots
+        <Dots
           index={index}
           quantity={images.length}
           dotClick={this.handleDotClick}
-        /> */}
+        />
 
         <SliderLeftArrow prevSlide={this.goToPreviousSlide} />
         <SliderRightArrow nextSlide={this.goToNextSlide} />
