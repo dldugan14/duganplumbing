@@ -40,6 +40,11 @@ export default class Slider extends Component {
     this.setState({ interval: x });
   }
 
+  componentWillUnmount() {
+    let x = window.clearInterval(this.state.interval);
+    this.setState({ interval: x });
+  }
+
   renderSlides = () => {
     const { images } = this.state;
     let slides = [];
@@ -125,4 +130,4 @@ export default class Slider extends Component {
     const slide = document.querySelector(".slide");
     return slide.clientWidth;
   };
-} // End Class
+}
