@@ -3,13 +3,10 @@ $HFColor: #1da1f2;
 .App {
   text-align: center;
 }
-// .container {
-//   height: 200px;
-//   width: 100%;
-// }
+
 .App-header {
   background-color: $HFColor;
-  height: auto;
+  height: 175px;
   width: 100%;
   padding-top: 20px;
   padding-right: auto;
@@ -18,9 +15,13 @@ $HFColor: #1da1f2;
     inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
 
   .nav {
+    background-color: $HFColor;
     padding-left: 0;
     margin-bottom: 0;
     padding-bottom: 0px;
+    // line-height: 200px;
+    flex-direction: row;
+    justify-content: center;
     height: 30px;
     width: 100%;
     list-style: none;
@@ -28,15 +29,27 @@ $HFColor: #1da1f2;
       margin-left: 10px;
       float: left;
     }
+
     .nav-item {
       float: left;
       margin-left: 20px;
-
+      border-left: #222;
+      border-left-style: solid;
+      border-left-width: 1px;
       padding-top: 3px;
+      position: inherit;
       text-decoration: none;
       color: rgb(0, 0, 0);
       font-family: Arial, Helvetica, sans-serif;
+      :hover {
+        background-color: #1da1f2;
+      }
+
+      .inner {
+        border-left: none;
+      }
       .active {
+        background-color: #1da1f2;
         float: left;
         text-decoration: none;
         color: rgb(255, 255, 255);
@@ -45,7 +58,13 @@ $HFColor: #1da1f2;
     }
   }
 }
-
+.nav-bar {
+  margin-top: 100px;
+  // background-color: #f9f9f9;
+}
+.first {
+  border-left: none !important;
+}
 .Footer {
   background-color: $HFColor;
   height: 75px;
