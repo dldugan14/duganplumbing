@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { nav } from "react-bootstrap";
+import { nav, DropdownButton } from "react-bootstrap";
 
 class Header extends Component {
   render() {
@@ -8,44 +8,74 @@ class Header extends Component {
       <div>
         <nav className="App-header">
           <div className="nav">
-            <NavLink to="/Home" className="nav-logo" activeClassName="active">
-              <img
-                className="nav-logo"
-                src={require("../assets/LogoTakeThree.svg")}
-              />
-            </NavLink>
-            <div className="nav-bar">
-              <ul className="nav">
-                <li className="nav-item first">
+            <div class="navbar" role="navigation">
+              <div class="container">
+                <div class="navbar-header">
                   <NavLink
                     to="/Home"
-                    className="nav-item inner"
+                    className="nav-logo"
                     activeClassName="active"
                   >
-                    Home
+                    <img
+                      className="nav-logo col-xs-11 col-sm-11 col-md-11 col-lg-11"
+                      src={require("../assets/LogoTakeThree.svg")}
+                    />
                   </NavLink>
-                </li>
+                </div>
 
-                <li className="nav-item">
-                  <NavLink
-                    to="/aboutus"
-                    className="nav-item inner"
-                    activeClassName="active"
-                  >
-                    About Us
-                  </NavLink>
-                </li>
+                <ul className="nav hidden-xs col-sm-6 col-md-6 col-lg-3 col-xl-6">
+                  <li className="nav-item first">
+                    <NavLink
+                      to="/Home"
+                      className="nav-item inner"
+                      activeClassName="active col-xs-6 col-sm-6 col-md-6 col-lg-6"
+                    >
+                      Home
+                    </NavLink>
+                  </li>
 
-                <li className="nav-item">
-                  <NavLink
-                    to="/contact"
-                    className="nav-item inner"
-                    activeClassName="active"
-                  >
-                    Schedule an Appointment
-                  </NavLink>
-                </li>
-              </ul>
+                  <li className="nav-item">
+                    <NavLink
+                      to="/aboutus"
+                      className="nav-item inner"
+                      activeClassName="active"
+                    >
+                      About Us
+                    </NavLink>
+                  </li>
+
+                  <li className="nav-item">
+                    <NavLink
+                      to="/contact"
+                      className="nav-item inner"
+                      activeClassName="active"
+                    >
+                      Schedule an Appointment
+                    </NavLink>
+                  </li>
+                </ul>
+
+                <DropdownButton
+                  type="button"
+                  className="navButton hidden-sm hidden-md hidden-lg hidden-xl"
+                  title="="
+                  pullRight
+                >
+                  <ul>
+                    <li className="">
+                      <NavLink to="/Home">Home</NavLink>
+                    </li>
+
+                    <li className="nav-item">
+                      <NavLink to="/aboutus">About Us</NavLink>
+                    </li>
+
+                    <li className="nav-item">
+                      <NavLink to="/contact">Schedule an Appointment</NavLink>
+                    </li>
+                  </ul>
+                </DropdownButton>
+              </div>
             </div>
           </div>
         </nav>
