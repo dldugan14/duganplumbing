@@ -9,6 +9,8 @@ import App from "./components/App";
 import Home from "./components/Home";
 import store from "./Store";
 import Footer from "./components/Footer";
+import Contact from "./components/Contact";
+import AboutUs from "./components/AboutUs";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -17,6 +19,8 @@ ReactDOM.render(
         <Route path="/" component={App} />
         <Route exact path="/" component={Home} />
         <Route exact path="/Home" component={Home} />
+        <Route exact path="/aboutus" component={AboutUs} />
+        <Route exact path="/contact" component={Contact} />
         <Route path="/" component={Footer} />
       </div>
     </BrowserRouter>
