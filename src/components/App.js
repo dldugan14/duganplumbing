@@ -3,11 +3,6 @@ import { connect } from "react-redux";
 
 import Header from "./Header";
 
-const mapStateToProps = state => ({
-  ...state.Common
-});
-
-const mapDispatchToProps = dispatch => ({});
 
 class App extends Component {
   render() {
@@ -20,4 +15,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

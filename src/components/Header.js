@@ -8,9 +8,9 @@ class Header extends Component {
       <div>
         <nav className="App-header">
           <div className="nav">
-            <div class="navbar" role="navigation">
-              <div class="container">
-                <div class="navbar-header">
+            <div className="navbar" role="navigation">
+              <div className="container">
+                <div className="navbar-header">
                   <NavLink
                     to="/Home"
                     className="nav-logo"
@@ -18,7 +18,7 @@ class Header extends Component {
                   >
                     <img
                       className="nav-logo col-xs-11 col-sm-11 col-md-11 col-lg-11"
-                      src={require("../assets/LogoTakeThree.svg")}
+                      src={require("../assets/tweaks2.svg")}
                     />
                   </NavLink>
                 </div>
@@ -58,6 +58,7 @@ class Header extends Component {
                 <DropdownButton
                   type="button"
                   className="navButton hidden-sm hidden-md hidden-lg hidden-xl"
+                  id="Dropdown menu"
                   title="="
                   pullRight
                 >
