@@ -19,6 +19,7 @@ class Header extends Component {
                     <img
                       className="nav-logo col-xs-11 col-sm-11 col-md-11 col-lg-11"
                       src={require("../assets/tweaks2.svg")}
+                      alt="logo"
                     />
                   </NavLink>
                 </div>

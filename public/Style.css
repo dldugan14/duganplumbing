@@ -194,9 +194,26 @@ body,
 
 .Contact {
   text-align: center; }
-  .Contact .contactForm {
-    display: flex; }
-    .Contact .contactForm .inputFeild {
-      flex: 1; }
+
+.formWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+  box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7);
+  max-width: 1170px;
+  margin-top: 50px;
+  margin-bottom: 100px; }
+  .formWrapper .contactForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px; }
+    .formWrapper .contactForm .warning {
+      padding-left: 10px; }
+    .formWrapper .contactForm .message {
+      grid-column: 1 / 3; }
+      .formWrapper .contactForm .message #formControlsTextarea {
+        height: 100px; }
+    .formWrapper .contactForm .AMPM {
+      margin-right: 10px; }
 
 /*# sourceMappingURL=Style.css.map */

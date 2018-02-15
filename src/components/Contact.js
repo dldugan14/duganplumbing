@@ -4,7 +4,6 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
-  HelpBlock,
   Button,
   Checkbox
 } from "react-bootstrap";
@@ -27,98 +26,198 @@ const mapDispatchToProps = dispatch => ({
   ChangeUSstate: USstate =>
     dispatch({ type: "CHANGE_STATE", payload: USstate }),
   ChangeZip: Zip => dispatch({ type: "CHANGE_ZIP", payload: Zip }),
-  ChangePhone: Phone => dispatch({ type: "CHANGE_PHONE", payload: Phone })
+  ChangePhone: Phone => dispatch({ type: "CHANGE_PHONE", payload: Phone }),
+  ChangeValidationState: value => {
+    dispatch({
+      type: "CHANGE_VALIDATION_STATE",
+      payload: value
+    });
+  }
 });
 
 class Contact extends Component {
-  constructor() {
-    super();
-  }
+  checkValidation = () => {
+    if (
+      (!this.props.email.includes("@") && this.props.validationStates.email) ||
+      (this.props.email.includes("@") && !this.props.validationStates.email)
+    ) {
+      this.props.ChangeValidationState("email");
+    }
+    if (
+      (this.props.FName.trim() === "" && this.props.validationStates.FName) ||
+      (this.props.FName.trim() !== "" && !this.props.validationStates.FName)
+    ) {
+      this.props.ChangeValidationState("FName");
+    }
+    if (
+      (this.props.phone.length < 10 && this.props.validationStates.phone) ||
+      (this.props.phone.length >= 10 && !this.props.validationStates.phone)
+    ) {
+      this.props.ChangeValidationState("phone");
+    }
+  };
+
+  handleSend = () => {
+    if (
+      this.props.phone.length >= 10 &&
+      this.props.FName.trim() !== "" &&
+      this.props.email.includes("@")
+    ) {
+      console.log("good to go!");
+    } else {
+      console.log("nah homie go back");
+    }
+  };
+
+  getValidationState = thing => {
+    if (!this.props.validationStates[thing]) {
+      return "error";
+    }
+  };
 
   render() {
     return (
-      <div className="Contact">
-        <h1>Contact Us</h1>
-        <form className="contactForm">
-          <FormGroup className="inputFeild col-lg-6">
-            <ControlLabel>First Name</ControlLabel>
-            <FormControl
-              type="text"
-              value={this.props.FName}
-              placeholder="First Name"
-              onChange={event => this.props.ChangeFName(event.target.value)}
-            />
-            <ControlLabel>Last Name</ControlLabel>
-
-            <FormControl
-              type="text"
-              value={this.props.LName}
-              placeholder="Last Name"
-              onChange={event => this.props.ChangeLName(event.target.value)}
-            />
-          </FormGroup>
-          <FormGroup className="inputFeild col-lg-6">
-            <ControlLabel>Email</ControlLabel>
-
-            <FormControl
-              type="email"
-              value={this.props.email}
-              placeholder="Email"
-              onChange={event => this.props.ChangeEmail(event.target.value)}
-            />
-            <ControlLabel>Phone Number</ControlLabel>
-
-            <FormControl
-              type="text"
-              value={this.props.FName}
-              placeholder="(555) 555-5555"
-              onChange={event => this.props.ChangeFName(event.target.value)}
-              // className="inputFeild"
-            />
-          </FormGroup>
-          <FormGroup className="inputFeild col-lg-6">
-            <ControlLabel>Street Address</ControlLabel>
-
-            <FormControl
-              type="text"
-              value={this.props.LName}
-              placeholder="Street Address"
-              onChange={event => this.props.ChangeLName(event.target.value)}
-            />
-            <ControlLabel>City</ControlLabel>
-
-            <FormControl
-              type="text"
-              value={this.props.FName}
-              placeholder="City"
-              onChange={event => this.props.ChangeFName(event.target.value)}
-              // className="inputFeild"
-            />
-          </FormGroup>
-          <FormGroup className="inputFeild col-lg-6">
-            <ControlLabel>Zipcode</ControlLabel>
-
-            <FormControl
-              type="text"
-              value={this.props.LName}
-              placeholder="Zipcode"
-              onChange={event => this.props.ChangeLName(event.target.value)}
-            />
-            <FormControl.Feedback />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Prefered Service Window</ControlLabel>
-            <Checkbox inline>AM</Checkbox> <Checkbox inline>PM</Checkbox>{" "}
-          </FormGroup>
-          <FormGroup controlId="formControlsTextarea">
-            <ControlLabel>Message</ControlLabel>
-            <FormControl
-              componentClass="textarea"
-              placeholder="What can we help you with?"
-            />
-          </FormGroup>
-        </form>
-        <Button onClick={() => console.log(this.props)}>Send</Button>
+      <div>
+        <h1 className="Contact">Contact Us</h1>
+        <div className="formWrapper">
+          <form className="contactForm">
+            <FormGroup validationState={this.getValidationState("FName")}>
+              <ControlLabel>First Name</ControlLabel>
+              {!this.props.validationStates.FName && (
+                <ControlLabel className="warning">Name required.</ControlLabel>
+              )}
+              <FormControl
+                type="text"
+                value={this.props.FName}
+                placeholder="First Name"
+                onChange={event => {
+                  this.props.ChangeFName(event.target.value);
+                }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>Last Name</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.props.LName}
+                placeholder="Last Name"
+                onChange={event => this.props.ChangeLName(event.target.value)}
+              />
+            </FormGroup>
+            <FormGroup validationState={this.getValidationState("email")}>
+              <ControlLabel>Email</ControlLabel>
+              {!this.props.validationStates.email && (
+                <ControlLabel className="warning">
+                  Not a valid email address.
+                </ControlLabel>
+              )}
+              <FormControl
+                type="email"
+                value={this.props.email}
+                placeholder="Email"
+                onChange={event => {
+                  this.props.ChangeEmail(event.target.value);
+                }}
+              />
+            </FormGroup>
+            <FormGroup validationState={this.getValidationState("phone")}>
+              <ControlLabel>Phone Number </ControlLabel>
+              {!this.props.validationStates.phone && (
+                <ControlLabel className="warning">
+                  Not a valid phone number.
+                </ControlLabel>
+              )}
+              <FormControl
+                type="text"
+                value={this.props.phone}
+                placeholder="(555) 555-5555"
+                onChange={event => {
+                  this.props.ChangePhone(event.target.value);
+                }}
+              />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>Street Address</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.props.streetAddress}
+                placeholder="Street Address"
+                onChange={event =>
+                  this.props.ChangeStreetAddress(event.target.value)
+                }
+              />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>City</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.props.city}
+                placeholder="City"
+                onChange={event => this.props.ChangeCity(event.target.value)}
+                // className="inputFeild"
+              />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>State</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.props.USstate}
+                placeholder="State"
+                onChange={event => this.props.ChangeUSstate(event.target.value)}
+              />
+              <FormControl.Feedback />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>Zipcode</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.props.zip}
+                placeholder="Zipcode"
+                onChange={event => this.props.ChangeZip(event.target.value)}
+              />
+              <FormControl.Feedback />
+            </FormGroup>
+            <FormGroup className="AMPM">
+              <ControlLabel className="AMPM">
+                Prefered Service Window
+              </ControlLabel>
+              <Checkbox
+                inline
+                value={this.props.AM}
+                onChange={() => this.props.ToggleAM()}
+              >
+                AM
+              </Checkbox>{" "}
+              <Checkbox
+                value={this.props.PM}
+                onChange={() => this.props.TogglePM()}
+                inline
+              >
+                PM
+              </Checkbox>
+            </FormGroup>
+            <FormGroup className="message" controlId="formControlsTextarea">
+              <ControlLabel>Message</ControlLabel>
+              <FormControl
+                componentClass="textarea"
+                value={this.props.message}
+                onChange={event => this.props.ChangeMessage(event.target.value)}
+                placeholder="What can we help you with?"
+              />
+            </FormGroup>
+          </form>
+          <Button
+            type="submit"
+            id="submitButton"
+            onClick={() => {
+              this.checkValidation();
+              this.handleSend();
+              console.log(this.props);
+            }}
+          >
+            Send
+          </Button>
+        </div>
       </div>
     );
   }

@@ -10,7 +10,13 @@ const defaultState = {
   streetAddress: "",
   city: "",
   USstate: "",
-  zip: ""
+  zip: "",
+  validationStates: {
+    FName: true,
+    email: true,
+    phone: true
+  },
+  incrementer: 1
 };
 
 export default (state = defaultState, action) => {
@@ -74,6 +80,15 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         USstate: action.payload
+      };
+    case "CHANGE_VALIDATION_STATE":
+      return {
+        ...state,
+        validationStates: {
+          ...state.validationStates,
+          [action.payload]: !state.validationStates[action.payload]
+        },
+        incrementer: state.incrementer + 1
       };
 
     default:

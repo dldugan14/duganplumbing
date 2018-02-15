@@ -251,13 +251,33 @@ body,
 
 .Contact {
   text-align: center;
-  .contactForm {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+}
 
-    .inputFeild {
-      flex: 1;
+.formWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+  box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7);
+  max-width: 1170px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  .contactForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    .warning {
+      padding-left: 10px;
+    }
+
+    .message {
+      grid-column: 1 / 3;
+
+      #formControlsTextarea {
+        height: 100px;
+      }
+    }
+    .AMPM {
+      margin-right: 10px;
     }
   }
 }
