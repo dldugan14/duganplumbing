@@ -11,6 +11,7 @@ import store from "./Store";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import AboutUs from "./components/AboutUs";
+import ThankYou from "./components/ThankYou";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route exact path="/Home" component={Home} />
         <Route exact path="/aboutus" component={AboutUs} />
         <Route exact path="/contact" component={Contact} />
+        <Route exact path="/ThankYou" component={ThankYou} />
         <Route path="/" component={Footer} />
       </div>
     </BrowserRouter>

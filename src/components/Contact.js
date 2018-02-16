@@ -8,6 +8,8 @@ import {
   Checkbox
 } from "react-bootstrap";
 
+import sendMail from "../agent";
+
 const mapStateToProps = state => ({
   ...state.Common
 });
@@ -63,9 +65,37 @@ class Contact extends Component {
       this.props.FName.trim() !== "" &&
       this.props.email.includes("@")
     ) {
-      console.log("good to go!");
+      let SW;
+      if (this.props.AM && this.props.PM) {
+        SW = "All Day";
+      } else if (!this.props.AM && !this.props.PM) {
+        SW = "None Selected";
+      } else if (this.props.AM) {
+        SW = "AM";
+      } else if (this.props.PM) {
+        SW = "PM";
+      } else {
+        SW = "ERROR: Contact sender for Service Window";
+      }
+
+      let body = {
+        FName: this.props.FName.trim(),
+        LName: this.props.LName.trim() || "No Input",
+        email: this.props.email.trim(),
+        phone: this.props.phone.trim(),
+        streetAddress: this.props.streetAddress.trim() || "No Input",
+        city: this.props.city.trim() || "No Input",
+        USstate: this.props.USstate.trim() || "No Input",
+        zip: this.props.zip.trim() || "No Input",
+        message: this.props.message || "No Input",
+        serviceWindow: SW
+      };
+
+      console.log(body);
+
+      sendMail.create(body);
     } else {
-      console.log("nah homie go back");
+      return null;
     }
   };
 
@@ -212,7 +242,7 @@ class Contact extends Component {
             onClick={() => {
               this.checkValidation();
               this.handleSend();
-              console.log(this.props);
+              // console.log(this.props);
             }}
           >
             Send
