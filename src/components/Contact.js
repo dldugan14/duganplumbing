@@ -1,12 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  FormGroup,
-  ControlLabel,
-  FormControl,
-  Button,
-  Checkbox
-} from "react-bootstrap";
 
 import sendMail from "../agent";
 
@@ -111,132 +104,139 @@ class Contact extends Component {
         <h1 className="Contact">Contact Us</h1>
         <div className="formWrapper">
           <form className="contactForm">
-            <FormGroup validationState={this.getValidationState("FName")}>
-              <ControlLabel>First Name</ControlLabel>
-              {!this.props.validationStates.FName && (
-                <ControlLabel className="warning">Name required.</ControlLabel>
-              )}
-              <FormControl
+            <label className="label">
+              First Name
+              <input
                 type="text"
+                className="input"
                 value={this.props.FName}
                 placeholder="First Name"
                 onChange={event => {
                   this.props.ChangeFName(event.target.value);
                 }}
               />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Last Name</ControlLabel>
-              <FormControl
+            </label>
+            <label className="label">
+              Last Name
+              <input
                 type="text"
+                className="input"
                 value={this.props.LName}
                 placeholder="Last Name"
                 onChange={event => this.props.ChangeLName(event.target.value)}
               />
-            </FormGroup>
-            <FormGroup validationState={this.getValidationState("email")}>
-              <ControlLabel>Email</ControlLabel>
-              {!this.props.validationStates.email && (
-                <ControlLabel className="warning">
+            </label>
+            <label className="label">
+              Email
+              {/* {!this.props.validationStates.email && (
+                <label className="warning">
                   Not a valid email address.
-                </ControlLabel>
-              )}
-              <FormControl
+                </label>
+              )} */}
+              <input
                 type="email"
+                className="input"
                 value={this.props.email}
                 placeholder="Email"
                 onChange={event => {
                   this.props.ChangeEmail(event.target.value);
                 }}
               />
-            </FormGroup>
-            <FormGroup validationState={this.getValidationState("phone")}>
-              <ControlLabel>Phone Number </ControlLabel>
+            </label>
+            <label className="label">
+              Phone Number
               {!this.props.validationStates.phone && (
-                <ControlLabel className="warning">
-                  Not a valid phone number.
-                </ControlLabel>
+                <label className="warning">Not a valid phone number.</label>
               )}
-              <FormControl
+              <input
                 type="text"
+                className="input"
                 value={this.props.phone}
                 placeholder="(555) 555-5555"
                 onChange={event => {
                   this.props.ChangePhone(event.target.value);
                 }}
               />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Street Address</ControlLabel>
-              <FormControl
+            </label>
+            <label className="label">
+              Street Address
+              <input
                 type="text"
+                className="input"
                 value={this.props.streetAddress}
                 placeholder="Street Address"
                 onChange={event =>
                   this.props.ChangeStreetAddress(event.target.value)
                 }
               />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>City</ControlLabel>
-              <FormControl
+            </label>
+            <label className="label">
+              City
+              <input
                 type="text"
+                className="input"
                 value={this.props.city}
                 placeholder="City"
                 onChange={event => this.props.ChangeCity(event.target.value)}
                 // className="inputFeild"
               />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>State</ControlLabel>
-              <FormControl
+            </label>
+            <label className="label">
+              State
+              <input
                 type="text"
+                className="input"
                 value={this.props.USstate}
                 placeholder="State"
                 onChange={event => this.props.ChangeUSstate(event.target.value)}
               />
-              <FormControl.Feedback />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Zipcode</ControlLabel>
-              <FormControl
+            </label>
+            <label className="label">
+              Zipcode
+              <input
                 type="text"
+                className="input"
                 value={this.props.zip}
                 placeholder="Zipcode"
                 onChange={event => this.props.ChangeZip(event.target.value)}
               />
-              <FormControl.Feedback />
-            </FormGroup>
-            <FormGroup className="AMPM">
-              <ControlLabel className="AMPM">
-                Prefered Service Window
-              </ControlLabel>
-              <Checkbox
-                inline
-                value={this.props.AM}
-                onChange={() => this.props.ToggleAM()}
-              >
-                AM
-              </Checkbox>{" "}
-              <Checkbox
-                value={this.props.PM}
-                onChange={() => this.props.TogglePM()}
-                inline
-              >
+            </label>
+            <label className="AMPM">
+              Prefered Service Window
+              <br />
+              <label>
+                {" "}
+                AM<input
+                  type="checkbox"
+                  className="input"
+                  value="AM"
+                  checked={this.props.AM}
+                  onChange={() => this.props.ToggleAM()}
+                />
+              </label>
+              <label>
+                {" "}
                 PM
-              </Checkbox>
-            </FormGroup>
-            <FormGroup className="message" controlId="formControlsTextarea">
-              <ControlLabel>Message</ControlLabel>
-              <FormControl
-                componentClass="textarea"
+                <input
+                  type="checkbox"
+                  className="input"
+                  value="PM"
+                  checked={this.props.PM}
+                  onChange={() => this.props.TogglePM()}
+                />
+              </label>
+            </label>
+            <label className="label">
+              Message
+              <textarea
+                className="input"
                 value={this.props.message}
                 onChange={event => this.props.ChangeMessage(event.target.value)}
                 placeholder="What can we help you with?"
               />
-            </FormGroup>
+            </label>
           </form>
-          <Button
+          <button
             type="submit"
             id="submitButton"
             onClick={() => {
@@ -246,7 +246,7 @@ class Contact extends Component {
             }}
           >
             Send
-          </Button>
+          </button>
         </div>
       </div>
     );

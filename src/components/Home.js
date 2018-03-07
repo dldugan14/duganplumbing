@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import Slider from "./slider/Slider";
-import { Carousel } from "react-bootstrap";
+import { Carousel } from "react-responsive-carousel";
 
 class Home extends Component {
   render() {
@@ -13,35 +13,36 @@ class Home extends Component {
         </p>
         <div className="wrapper">
           <div className="car">
-            <Carousel>
-              <Carousel.Item>
+            <Carousel
+              showThumbs={false}
+              infiniteLoop={true}
+              autoPlay={true}
+              emulateTouch={true}
+              width={700}
+              showStatus={false}
+              interval={10000}
+            >
+              <div>
                 <img
                   alt="900x500"
                   height={500}
                   src={require("../assets/download.jpg")}
                 />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  alt="900x500"
-                  height={500}
-                  src={require("../assets/two.jpg")}
-                />
-              </Carousel.Item>
-              {/* <Carousel.Item>
+              </div>
+              <div>
                 <img
                   alt="900x500"
                   height={500}
                   src={require("../assets/plumbing.jpg")}
                 />
-              </Carousel.Item> */}
-              <Carousel.Item>
+              </div>
+              <div>
                 <img
                   alt="900x500"
                   hight={500}
                   src={require("../assets/plumberstock.jpg")}
                 />
-              </Carousel.Item>
+              </div>
             </Carousel>
           </div>
         </div>
@@ -49,7 +50,7 @@ class Home extends Component {
         <h2>Testimonials</h2>
         <div className="wrapper">
           <div className="comments">
-            <Carousel indicators={false}>
+            {/* <Carousel indicators={false}>
               <Carousel.Item>
                 <p>
                   "Just wanted you to know that Carlos did a wonderful job at
@@ -185,7 +186,7 @@ class Home extends Component {
                 </p>
                 <h3>-Kristen S.</h3>
               </Carousel.Item>
-            </Carousel>
+            </Carousel> */}
           </div>
         </div>
       </div>

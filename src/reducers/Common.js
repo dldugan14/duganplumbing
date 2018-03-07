@@ -16,7 +16,7 @@ const defaultState = {
     email: true,
     phone: true
   },
-  incrementer: 1
+  WinWidth: null
 };
 
 export default (state = defaultState, action) => {
@@ -87,10 +87,13 @@ export default (state = defaultState, action) => {
         validationStates: {
           ...state.validationStates,
           [action.payload]: !state.validationStates[action.payload]
-        },
-        incrementer: state.incrementer + 1
+        }
       };
-
+    case "SET_WIDTH":
+      return {
+        ...state,
+        WinWidth: action.payload
+      };
     default:
       return state;
   }
