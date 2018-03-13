@@ -262,6 +262,7 @@ body,
   text-align: center; }
 
 .formWrapper {
+  text-align: left !important;
   margin-left: auto;
   margin-right: auto;
   padding: 1em;
@@ -273,15 +274,37 @@ body,
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px; }
-    .formWrapper .contactForm .warning {
-      padding-left: 10px; }
-    .formWrapper .contactForm .label .input {
-      padding-left: 12px; }
-    .formWrapper .contactForm .message {
-      grid-column: 1 / 3; }
-      .formWrapper .contactForm .message #formControlsTextarea {
-        height: 100px; }
+    @media screen and (max-width: 425px) {
+      .formWrapper .contactForm {
+        grid-template-columns: 1fr !important; } }
+    .formWrapper .contactForm p {
+      margin: 0; }
+    .formWrapper .contactForm .label {
+      display: block; }
+    .formWrapper .contactForm button,
+    .formWrapper .contactForm input,
+    .formWrapper .contactForm textarea,
+    .formWrapper .contactForm select {
+      width: 100%;
+      padding: 1em;
+      padding-left: 0;
+      padding-right: 0;
+      border: 1px solid #c9e6ff; }
+    .formWrapper .contactForm button:hover,
+    .formWrapper .contactForm button:focus {
+      background: #1da1f2;
+      color: #fff;
+      outline: 0;
+      transition: background-color 2s ease-out; }
+    .formWrapper .contactForm textarea {
+      font-family: Arial, Helvetica, sans-serif; }
+    .formWrapper .contactForm .full {
+      grid-column: 1/3; }
+      @media screen and (max-width: 425px) {
+        .formWrapper .contactForm .full {
+          grid-column: 1; } }
     .formWrapper .contactForm .AMPM {
-      margin-right: 10px; }
+      margin-right: 10px;
+      width: auto !important; }
 
 /*# sourceMappingURL=Style.css.map */

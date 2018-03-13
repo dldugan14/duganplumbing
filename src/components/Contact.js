@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Dots from "react-activity/lib/Dots";
+import "react-activity/lib/Dots/Dots.css";
 
 import sendMail from "../agent";
+import USSTATES from "../assets/ds";
 
 const mapStateToProps = state => ({
   ...state.Common
@@ -27,11 +30,13 @@ const mapDispatchToProps = dispatch => ({
       type: "CHANGE_VALIDATION_STATE",
       payload: value
     });
-  }
+  },
+  ToggleSendFlag: () => dispatch({ type: "TOGGLE_SEND_FLAG" })
 });
 
 class Contact extends Component {
   checkValidation = () => {
+    this.props.ToggleSendFlag();
     if (
       (!this.props.email.includes("@") && this.props.validationStates.email) ||
       (this.props.email.includes("@") && !this.props.validationStates.email)
@@ -88,7 +93,15 @@ class Contact extends Component {
 
       sendMail.create(body);
     } else {
-      return null;
+      this.props.ToggleSendFlag();
+    }
+  };
+
+  activityToggler = () => {
+    if (!this.props.SendFlag) {
+      return "Send";
+    } else {
+      return <Dots />;
     }
   };
 
@@ -104,8 +117,9 @@ class Contact extends Component {
         <h1 className="Contact">Contact Us</h1>
         <div className="formWrapper">
           <form className="contactForm">
-            <label className="label">
-              First Name
+            <p>
+              <label className="label">First Name</label>
+
               <input
                 type="text"
                 className="input"
@@ -114,10 +128,12 @@ class Contact extends Component {
                 onChange={event => {
                   this.props.ChangeFName(event.target.value);
                 }}
+                required
               />
-            </label>
-            <label className="label">
-              Last Name
+            </p>
+            <p>
+              <label className="label">Last Name</label>
+
               <input
                 type="text"
                 className="input"
@@ -125,14 +141,10 @@ class Contact extends Component {
                 placeholder="Last Name"
                 onChange={event => this.props.ChangeLName(event.target.value)}
               />
-            </label>
-            <label className="label">
-              Email
-              {/* {!this.props.validationStates.email && (
-                <label className="warning">
-                  Not a valid email address.
-                </label>
-              )} */}
+            </p>
+            <p>
+              <label className="label">Email</label>
+
               <input
                 type="email"
                 className="input"
@@ -141,25 +153,27 @@ class Contact extends Component {
                 onChange={event => {
                   this.props.ChangeEmail(event.target.value);
                 }}
+                required
               />
-            </label>
-            <label className="label">
-              Phone Number
-              {!this.props.validationStates.phone && (
-                <label className="warning">Not a valid phone number.</label>
-              )}
+            </p>
+            <p>
+              <label className="label">Phone Number</label>
+
               <input
-                type="text"
-                className="input"
+                type="tel"
+                id="telNo"
+                className="tel"
                 value={this.props.phone}
                 placeholder="(555) 555-5555"
                 onChange={event => {
                   this.props.ChangePhone(event.target.value);
                 }}
+                required
               />
-            </label>
-            <label className="label">
-              Street Address
+            </p>
+            <p>
+              <label className="label">Street Address</label>
+
               <input
                 type="text"
                 className="input"
@@ -169,30 +183,34 @@ class Contact extends Component {
                   this.props.ChangeStreetAddress(event.target.value)
                 }
               />
-            </label>
-            <label className="label">
-              City
+            </p>
+            <p>
+              <label className="label">City</label>
+
               <input
                 type="text"
                 className="input"
                 value={this.props.city}
                 placeholder="City"
                 onChange={event => this.props.ChangeCity(event.target.value)}
-                // className="inputFeild"
               />
-            </label>
-            <label className="label">
-              State
-              <input
-                type="text"
-                className="input"
-                value={this.props.USstate}
-                placeholder="State"
+            </p>
+            <p>
+              <label className="label">State</label>
+
+              <select
                 onChange={event => this.props.ChangeUSstate(event.target.value)}
-              />
-            </label>
-            <label className="label">
-              Zipcode
+              >
+                {USSTATES.map(ST => (
+                  <option key={ST} value={ST}>
+                    {ST}
+                  </option>
+                ))}
+              </select>
+            </p>
+            <p>
+              <label className="label">Zipcode</label>
+
               <input
                 type="text"
                 className="input"
@@ -200,53 +218,57 @@ class Contact extends Component {
                 placeholder="Zipcode"
                 onChange={event => this.props.ChangeZip(event.target.value)}
               />
-            </label>
-            <label className="AMPM">
-              Prefered Service Window
+            </p>
+            <p>
+              <label className="AMPM">
+                Prefered Service Window
+                <br />
+                <label>
+                  {" "}
+                  AM<input
+                    type="checkbox"
+                    className="AMPM"
+                    value="AM"
+                    checked={this.props.AM}
+                    onChange={() => this.props.ToggleAM()}
+                  />
+                </label>
+                <label>
+                  {" "}
+                  PM
+                  <input
+                    type="checkbox"
+                    className="AMPM"
+                    value="PM"
+                    checked={this.props.PM}
+                    onChange={() => this.props.TogglePM()}
+                  />
+                </label>
+              </label>
+            </p>
+            <p className="full">
+              <label className="label">Message</label>
               <br />
-              <label>
-                {" "}
-                AM<input
-                  type="checkbox"
-                  className="input"
-                  value="AM"
-                  checked={this.props.AM}
-                  onChange={() => this.props.ToggleAM()}
-                />
-              </label>
-              <label>
-                {" "}
-                PM
-                <input
-                  type="checkbox"
-                  className="input"
-                  value="PM"
-                  checked={this.props.PM}
-                  onChange={() => this.props.TogglePM()}
-                />
-              </label>
-            </label>
-            <label className="label">
-              Message
               <textarea
-                className="input"
+                className="message"
                 value={this.props.message}
                 onChange={event => this.props.ChangeMessage(event.target.value)}
                 placeholder="What can we help you with?"
-              />
-            </label>
+              />{" "}
+            </p>{" "}
+            <button
+              type="submit"
+              id="submitButton"
+              className="full"
+              onClick={e => {
+                this.checkValidation();
+                this.handleSend();
+                // console.log(this.props);
+              }}
+            >
+              {this.activityToggler()}
+            </button>
           </form>
-          <button
-            type="submit"
-            id="submitButton"
-            onClick={() => {
-              this.checkValidation();
-              this.handleSend();
-              // console.log(this.props);
-            }}
-          >
-            Send
-          </button>
         </div>
       </div>
     );

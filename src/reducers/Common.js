@@ -16,7 +16,8 @@ const defaultState = {
     email: true,
     phone: true
   },
-  WinWidth: null
+  WinWidth: null,
+  SendFlag: false
 };
 
 export default (state = defaultState, action) => {
@@ -93,6 +94,11 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         WinWidth: action.payload
+      };
+    case "TOGGLE_SEND_FLAG":
+      return {
+        ...state,
+        SendFlag: !state.SendFlag
       };
     default:
       return state;
