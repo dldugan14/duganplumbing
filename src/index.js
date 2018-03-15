@@ -18,8 +18,8 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Route path="/" component={Header} />
-        {/* <Route exact path="/" component={Home} />
-        <Route exact path="/Home" component={Home} /> */}
+        <Route exact path="/" component={Home} />
+        <Route exact path="/Home" component={Home} />
         <Route exact path="/aboutus" component={AboutUs} />
         <Route exact path="/contact" component={Contact} />
         {/* <Route exact path="/ThankYou" component={ThankYou} /> */}

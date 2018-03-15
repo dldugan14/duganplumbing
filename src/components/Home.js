@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 // import Slider from "./slider/Slider";
 import { Carousel } from "react-responsive-carousel";
+import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
+const img1 = require("../assets/plumberstock.jpg");
+const img2 = require("../assets/download.jpg");
+const img3 = require("../assets/plumbing.jpg");
 
 class Home extends Component {
   render() {
@@ -18,30 +22,18 @@ class Home extends Component {
               infiniteLoop={true}
               autoPlay={true}
               emulateTouch={true}
-              width={700}
+              width={"700px"}
               showStatus={false}
               interval={10000}
             >
               <div>
-                <img
-                  alt="900x500"
-                  height={500}
-                  src={require("../assets/download.jpg")}
-                />
+                <img alt="900x500" hight={500} src={img1} />
               </div>
               <div>
-                <img
-                  alt="900x500"
-                  height={500}
-                  src={require("../assets/plumbing.jpg")}
-                />
+                <img alt="900x500" height={500} src={img2} />
               </div>
               <div>
-                <img
-                  alt="900x500"
-                  hight={500}
-                  src={require("../assets/plumberstock.jpg")}
-                />
+                <img alt="900x500" height={500} src={img3} />
               </div>
             </Carousel>
           </div>
